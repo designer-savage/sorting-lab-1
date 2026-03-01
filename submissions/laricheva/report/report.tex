@@ -1,0 +1,98 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{siunitx}
+\geometry{margin=2cm}
+\sisetup{group-separator={\,}}
+
+\title{Практикум №1 «Методы сортировки»\\Отчет по экспериментальному сравнению}
+\author{Ларичева Дарья}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Постановка}
+Реализованы две сортировки массива целых чисел по возрастанию: \textbf{Selection Sort} и \textbf{Shaker Sort}. Для каждого метода измерялись:
+\begin{itemize}
+  \item число сравнений элементов;
+  \item число перемещений (присваиваний). Для обмена двух элементов учитывалось 3 перемещения.
+\end{itemize}
+
+Сравнение проводилось на одинаковых исходных массивах для каждого метода. Рассматривались типы входных данных:
+\begin{enumerate}
+  \item уже упорядочен;
+  \item упорядочен в обратном порядке;
+  \item случайный;
+  \item случайный (другой массив).
+\end{enumerate}
+Длины массивов: $n \in \{10, 100, 1000, 10000\}$. Для каждого случая выполнялось 10 запусков, в таблицах приведены средние значения.
+
+\section*{Результаты}
+\begin{table}[h!]
+\centering
+\caption{Средние значения для $n=10$ (10 запусков)}
+\begin{tabular}{l S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0]}
+\toprule
+{Тип массива} & {Sel: сравнения} & {Sel: перемещения} & {Shaker: сравнения} & {Shaker: перемещения} \\
+\midrule
+Упорядочен & 45 & 0 & 9 & 0 \\
+Обратный & 45 & 15 & 45 & 135 \\
+Случайный & 45 & 23 & 35 & 67 \\
+Случайный 2 & 45 & 21 & 36 & 73 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Средние значения для $n=100$ (10 запусков)}
+\begin{tabular}{l S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0]}
+\toprule
+{Тип массива} & {Sel: сравнения} & {Sel: перемещения} & {Shaker: сравнения} & {Shaker: перемещения} \\
+\midrule
+Упорядочен & 4950 & 0 & 99 & 0 \\
+Обратный & 4950 & 150 & 4950 & 14850 \\
+Случайный & 4950 & 288 & 3442 & 7522 \\
+Случайный 2 & 4950 & 287 & 3314 & 7258 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Средние значения для $n=1000$ (10 запусков)}
+\begin{tabular}{l S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0]}
+\toprule
+{Тип массива} & {Sel: сравнения} & {Sel: перемещения} & {Shaker: сравнения} & {Shaker: перемещения} \\
+\midrule
+Упорядочен & 499500 & 0 & 999 & 0 \\
+Обратный & 499500 & 1500 & 499500 & 1498500 \\
+Случайный & 499500 & 2979 & 336132 & 754527 \\
+Случайный 2 & 499500 & 2976 & 331432 & 741169 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Средние значения для $n=10000$ (10 запусков)}
+\begin{tabular}{l S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0] S[round-mode=places,round-precision=0]}
+\toprule
+{Тип массива} & {Sel: сравнения} & {Sel: перемещения} & {Shaker: сравнения} & {Shaker: перемещения} \\
+\midrule
+Упорядочен & 49995000 & 0 & 9999 & 0 \\
+Обратный & 49995000 & 15000 & 49995000 & 149985000 \\
+Случайный & 49995000 & 29968 & 33441166 & 75236716 \\
+Случайный 2 & 49995000 & 29969 & 33364674 & 75111827 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Вывод}
+Selection Sort делает фиксированное количество сравнений порядка $O(n^2)$ почти независимо от исходного порядка. Shaker Sort на упорядоченном массиве работает существенно лучше (мало обменов), но в худшем случае также имеет квадратичную сложность.
+
+\end{document}
